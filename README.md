@@ -2,7 +2,7 @@
 
 ## Overview
 
-This framework introduces a novel multi-modal contrastive learning approach for mammography analysis that synergistically combines image-based self-supervised learning with metadata-driven attention. Leveraging the SimCLR paradigm, the system employs rigorous data augmentation to learn robust representations from mammogram images while integrating clinical metadata through a multi-head attention mechanism to enhance diagnostic interpretability.
+The paper introduces a novel multi-modal contrastive learning approach for mammography analysis that synergistically combines image-based self-supervised learning with metadata-driven attention. Leveraging the SimCLR paradigm, the system employs rigorous data augmentation to learn robust representations from mammogram images while integrating clinical metadata through a multi-head attention mechanism to enhance diagnostic interpretability.
 
 The framework enables meaningful cluster formation in the learned embedding space, clearly delineated via t-SNE visualizations. These clusters facilitate various downstream applications including precise pathology assessment, adaptive refinement of interpretability techniques, customized patient assignment, and identification of biases related to imaging devices and hospital protocols.
 
