@@ -5,8 +5,7 @@
 Before running the code, ensure the following directory structure:
 ```markdown
 project_root/
-├── script.py                                # Main script
-├── run_script.py                            # Optional: Colab execution script
+├── mammogram_cluster.py                                # Main script
 ├── manifest-ZkhPvrLo5216730872708713142/
 │   └── CBIS-DDSM/                          # Dataset directory
 │       ├── mass_case_description_train_set.csv
@@ -31,7 +30,7 @@ project_root/
 
 To train the model using full SimCLR contrastive learning:
 ```bash
-python script.py \
+python mammogram_cluster.py \
   --root_dir /path/to/manifest-<ID> \
   --dicom_list /path/to/dcm_files.txt \
   --output_dir ./outputs \
@@ -50,7 +49,7 @@ python script.py \
 
 To load a pretrained checkpoint for inference (without training from scratch):
 ```bash
-python script.py \
+python mammogram_cluster.py \
   --root_dir /path/to/manifest-<ID> \
   --dicom_list /path/to/dcm_files.txt \
   --output_dir ./outputs \
@@ -66,7 +65,7 @@ python script.py \
 
  To generate a t-SNE visualization on test embeddings using a previously trained model:
 ```bash
- python script.py \
+ python mammogram_cluster.py \
   --root_dir /path/to/manifest-<ID> \
   --dicom_list /path/to/dcm_files.txt \
   --output_dir ./outputs \
