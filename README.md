@@ -1,28 +1,26 @@
 # Multi-Modal Clustering Framework for Self-Supervised Mammography Analysis with Clinical Metadata Fusion
 
-## Overview
 
-The paper introduces a novel multi-modal contrastive learning approach for mammography analysis that synergistically combines image-based self-supervised learning with metadata-driven attention. Leveraging the SimCLR paradigm, the system employs rigorous data augmentation to learn robust representations from mammogram images while integrating clinical metadata through a multi-head attention mechanism to enhance diagnostic interpretability.
+This framework implements a novel multi-modal contrastive learning architecture for mammography analysis that integrates image-based self-supervised learning with metadata-driven attention mechanisms. The approach leverages the SimCLR paradigm with significant extensions for medical imaging applications, establishing a robust representation learning pipeline for mammograms that unifies visual and clinical metadata features.
 
-The framework enables meaningful cluster formation in the learned embedding space, clearly delineated via t-SNE visualizations. These clusters facilitate various downstream applications including precise pathology assessment, adaptive refinement of interpretability techniques, customized patient assignment, and identification of biases related to imaging devices and hospital protocols.
+The architecture employs a dual-input contrastive learning strategy where each mammogram undergoes distinct augmentations via parameterized transformations (horizontal flips, rotations, scaling variations, and intensity perturbations). Simultaneously, categorical clinical metadata (BI-RADS classifications, breast density, pathology labels) is encoded through embedding layers and processed via a multi-head attention mechanism (4 heads, embedding dimension 128) that effectively models inter-feature dependencies.
 
-## Key Features
+Feature extraction utilizes a modified Swin Transformer (swin_base_patch4_window7_224) backbone with single-channel input adaptation for grayscale mammograms. The multi-modal fusion process concatenates the globalized image features with attention-pooled metadata embeddings before projection through a non-linear MLP (512 → 128 dimensions) with GELU activation and L2 normalization.
 
-- **Self-Supervised Contrastive Learning**: Uses SimCLR with dual-view augmentation and NT-Xent loss
-- **Metadata Fusion**: Incorporates clinical metadata (BI-RADS, breast density, pathology) through multi-head attention
-- **Swin Transformer Backbone**: Utilizes pre-trained hierarchical vision transformer for feature extraction
-- **t-SNE Visualization**: Provides clear delineation of embedding clusters for analysis
-- **Clustering Applications**: Supports pathology, radiologist, patient, and device/hospital clustering
+Training employs the NT-Xent (Normalized Temperature-scaled Cross-Entropy) loss function with a temperature parameter of 0.07, optimizing similarity between positive pairs while maximizing distance to negative samples. The NT-Xent implementation addresses numerical stability issues through proper normalization and row-based maximum subtraction. Optimization utilizes AdamW with cosine annealing warm restarts for robust convergence.
 
-## Technical Architecture
+The learned embedding space demonstrates emergent clustering properties visualized through t-SNE dimensionality reduction, revealing distinct grouping patterns that correspond to pathological classifications without explicit supervision. This behavior enables downstream applications including pathology assessment, radiologist interpretation standardization, patient cohort identification, and detection of acquisition protocol biases.
 
-The framework consists of several key components:
-1. **Dual-View Augmentation**: Creates two augmented views of each mammogram as positive pairs
-2. **Multi-Modal Data Processing**: Combines image features with categorical metadata
-3. **Swin Transformer Encoder**: Extracts visual features from mammograms
-4. **Metadata Attention Mechanism**: Processes clinical metadata through multi-head attention
-5. **Projection Head**: Maps combined features to the final embedding space
-6. **NT-Xent Loss**: Optimizes for similarity between positive pairs
+## Implementation Details
+
+- **Image Augmentation Pipeline**: Implements comprehensive medical-specific transformations including controlled intensity perturbations suitable for preserving diagnostic features
+- **Metadata Processing**: Creates numerically encoded representations for categorical features with explicit embedding layers
+- **Encoder Architecture**: Utilizes hierarchical Swin Transformer features with adaptive average pooling for fixed-dimension representation
+- **Multi-head Attention**: Implements scaled dot-product attention with 4 heads on metadata features to model cross-feature relationships
+- **Training Protocol**: Employs gradient clipping (norm 1.0), warm restart scheduling, and configurable batch sizes with three-way (80/10/10) dataset splitting
+- **Evaluation Methodology**: Implements clean embedding extraction for t-SNE visualization with pathology-based colorization
+
+The implementation includes comprehensive data handling for DICOM files from the CBIS-DDSM dataset, synchronized metadata parsing, and optimized data loading through custom collation functions.
 
 ## Command Line Arguments
 
