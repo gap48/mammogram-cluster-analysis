@@ -44,7 +44,7 @@ The implementation includes comprehensive data handling for DICOM files from the
 
 ```bash
 # SimCLR Training
-python script.py \
+python mammogram_cluster.py \
   --root_dir /path/to/manifest-<ID> \
   --dicom_list /path/to/dcm_files.txt \
   --output_dir ./outputs \
@@ -55,7 +55,7 @@ python script.py \
   --do_tsne
 
 # Inference with a pre-trained model
-python script.py \
+python mammogram_cluster.py \
   --root_dir /path/to/manifest-<ID> \
   --dicom_list /path/to/dcm_files.txt \
   --output_dir ./outputs \
