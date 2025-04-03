@@ -1,7 +1,7 @@
 # Multi-Modal Clustering Framework for Self-Supervised Mammography Analysis with Clinical Metadata Fusion
 
 
-This framework implements a novel multi-modal contrastive learning architecture for mammography analysis that integrates image-based self-supervised learning with metadata-driven attention mechanisms. The approach leverages the SimCLR paradigm with significant extensions for medical imaging applications, establishing a robust representation learning pipeline for mammograms that unifies visual and clinical metadata features.
+The work implements a novel multi-modal contrastive learning architecture for mammography analysis that integrates image-based self-supervised learning with metadata-driven attention mechanisms. The approach leverages the SimCLR paradigm with significant extensions for medical imaging applications, establishing a robust representation learning pipeline for mammograms that unifies visual and clinical metadata features.
 
 The architecture employs a dual-input contrastive learning strategy where each mammogram undergoes distinct augmentations via parameterized transformations (horizontal flips, rotations, scaling variations, and intensity perturbations). Simultaneously, categorical clinical metadata (BI-RADS classifications, breast density, pathology labels) is encoded through embedding layers and processed via a multi-head attention mechanism (4 heads, embedding dimension 128) that effectively models inter-feature dependencies.
 
